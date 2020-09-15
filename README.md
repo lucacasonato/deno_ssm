@@ -1,2 +1,21 @@
 # deno_ssm
-Amazon SSM sdk from Deno
+
+Amazon SSM sdk for Deno
+
+> ⚠️ This project is work in progress. Expect breaking changes.
+
+## Examples
+
+```ts
+import { SSM } from "https://deno.land/x/ssm@0.1.0/mod.ts";
+
+// Initialize the SSM client.
+const ssm = new SSM({
+  accessKeyID: Deno.env.get("AWS_ACCESS_KEY_ID")!,
+  secretKey: Deno.env.get("AWS_SECRET_ACCESS_KEY")!,
+  region: "us-east-2",
+});
+
+// Retrieve a parameter.
+const res = await queue.getParameter({ Name: "MyParam" });
+```
