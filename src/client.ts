@@ -24,6 +24,7 @@ export class SSM {
     this.#signer = new AWSSignerV4(config.region, {
       awsAccessKeyId: config.accessKeyID,
       awsSecretKey: config.secretKey,
+      sessionToken: config.sessionToken,
     });
     this.#host = config.endpointURL ??
       `https://ssm.${config.region}.amazonaws.com/`;
