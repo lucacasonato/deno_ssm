@@ -63,7 +63,7 @@ export class SSM {
 
   async getParameter(
     options: GetParameterOptions,
-  ): Promise<string | undefined> {
+  ): Promise<GetParameterResult | undefined> {
     const res = await this._doRequest(
       GetParameterAction,
       options,
@@ -80,6 +80,7 @@ export class SSM {
       );
     }
 
-    return await res.json();
+    const j = await res.json();
+    return j.GetParameterResponse?.GetParameterResult;
   }
 }
