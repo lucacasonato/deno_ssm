@@ -7,7 +7,7 @@ Amazon SSM sdk for Deno
 ## Examples
 
 ```ts
-import { SSM } from "https://deno.land/x/ssm@0.1.0/mod.ts";
+import { SSM } from "https://deno.land/x/ssm@0.1.3/mod.ts";
 
 // Initialize the SSM client.
 const ssm = new SSM({
