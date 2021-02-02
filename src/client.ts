@@ -1,6 +1,6 @@
 import { AWSSignerV4, sha256Hex } from "../deps.ts";
 import type { GetParameterOptions, GetParameterResult } from "./types.ts";
-import { SSMError } from"./error.ts"
+import { SSMError } from "./error.ts";
 import { GetParameterAction } from "./actions.ts";
 
 interface Params {
@@ -44,7 +44,7 @@ export class SSM {
 
     const headers: Params = {
       "X-Amz-Target": `AmazonSSM.${action}`,
-      "Accept": "application/json"
+      "Accept": "application/json",
     };
 
     const request = new Request(url.toString(), {
