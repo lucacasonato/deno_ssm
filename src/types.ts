@@ -1,5 +1,5 @@
 export type PSParameterName = string;
-export type ParameterType = "String"|"StringList"|"SecureString"|string;
+export type ParameterType = "String" | "StringList" | "SecureString" | string;
 export type ParameterValue = string;
 export type PSParameterValue = string;
 export type PSParameterVersion = number;
