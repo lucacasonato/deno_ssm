@@ -1,4 +1,4 @@
-import { AWSSignerV4, sha256Hex } from "../deps.ts";
+import { AWSSignerV4 } from "../deps.ts";
 import type { GetParameterOptions, GetParameterResult } from "./types.ts";
 import { SSMError } from "./error.ts";
 import { GetParameterAction } from "./actions.ts";
@@ -54,7 +54,8 @@ export class SSM {
     });
 
     const signedRequest = await this.#signer.sign("ssm", request);
-    signedRequest.headers.set("x-amz-content-sha256", sha256Hex(body ?? ""));
+    const contentHash = await sha256Hex(body ?? "");
+    signedRequest.headers.set("x-amz-content-sha256", contentHash);
     if (body) {
       signedRequest.headers.set("content-length", body.length.toFixed(0));
     }
@@ -83,4 +84,14 @@ export class SSM {
     const j = await res.json();
     return j.GetParameterResponse?.GetParameterResult;
   }
+}
+
+async function sha256Hex(data: string | Uint8Array): Promise<string> {
+  if (typeof data === "string") {
+    data = new TextEncoder().encode(data);
+  }
+  const hash = await crypto.subtle.digest("SHA-256", data);
+  return [...new Uint8Array(hash)]
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
